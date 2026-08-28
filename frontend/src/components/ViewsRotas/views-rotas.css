@@ -1,12 +1,13 @@
 .section-views-rotas {
     position: absolute;
     left: 0;
-    right: 0;
+    right: 70%;
     bottom: 0;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    background-color: var(--gray-900);
+    background-color: var(--gray-950);
     z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
     transition: height 700ms ease;
 }
 
@@ -19,11 +20,51 @@
     background-color: var(--gray-700);
 }
 
-.section-views-rotas h2 {
+/* .section-views-rotas h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--gray-600);
     font-weight: 400;
-    padding-top: 40px;
-    letter-spacing: 2px;
+    padding-top: 45px;
+    letter-spacing: 2.2px;
+    word-spacing: 5px;
+} */
+
+.div-radio-rota {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    max-width: 90%;
+}
+
+.div-radio-rota input[type="radio"] {
+  display: none;
+}
+
+.div-radio-rota label {
+  width: 90%;
+  padding: 20px 0;
+  border: 1px solid #FFFFFF40;
+  color: #FFFFFF70;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.div-radio-rota input[type="radio"]:checked + label {
+  background-color: #FFFFFF20;
+  color: white;
+  border: 1px solid #FFFFFF60;
+}
+
+.lucide-gauge, .lucide-lock, .lucide-shield-user {
+    margin: 2px auto;
+    display: block;
+}
+
+@media (width <= 1000px) {
+    .section-views-rotas {
+        right: 0;
+    }
 }

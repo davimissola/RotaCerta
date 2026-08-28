@@ -1,4 +1,4 @@
-// API KEY GOOGLE -> AIzaSyAbBtqKTwT0CYeXFkMWSCgrajNJlVfHMfo - AIzaSyAbBtqKTwT0CYeXFkMWSCgrajNJlVfHMfo
+// API KEY GOOGLE -> AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU - 27/08, email cc26125@g.unicamp.br
 import './maps.css'
 import { useEffect } from 'react'
 
