@@ -16,20 +16,23 @@
 }
 
 .report {
-    /* background-color: #860c18; */
+    /* background-color: #b42b3999; */
     background-color: var(--gray-700);
-    color: var(--gray-50);
+    color: var(--gray-100);
 }
 
 .help {
-    background-color: var(--gray-100);
+    /*background-color: #201f7499;*/
     color: var(--gray-700);
+    background-color: var(--gray-100);
 }
 
 .report:hover {
+    /* background-color: #b42b39; */
     background-color: var(--gray-800);
 }
 
 .help:hover {
+    /* background-color: #201f74; */
     background-color: var(--gray-200);
 }

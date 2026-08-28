@@ -1,3 +1,4 @@
+import './page-maps.css';
 import { FooterMaps } from "../../components/FooterMaps";
 import { HeaderMaps } from "../../components/HeaderMaps";
 import { Maps } from "../../components/Maps";
