@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Satoshi', sans-serif;
+}
+
+:root {
+    --gray-0:   #FFFFFF;
+    --gray-25:  #FCFCFD;
+    --gray-50:  #F8F9FA;
+    --gray-75:  #F4F5F6;
+    --gray-100: #EEF0F2;
+    --gray-150: #E7E9EC;
+    --gray-200: #DEE1E5;
+    --gray-250: #D4D8DD;
+    --gray-300: #C8CDD3;
+    --gray-350: #BBC0C7;
+    --gray-400: #AEB4BB;
+    --gray-450: #9DA3AA;
+    --gray-500: #8B9299;
+    --gray-550: #797F86;
+    --gray-600: #686E75;
+    --gray-650: #585E64;
+    --gray-700: #484D53;
+    --gray-750: #393E43;
+    --gray-800: #2D3135;
+    --gray-850: #222528;
+    --gray-900: #181A1D;
+    --gray-950: #0D0E10;
+    --gray-1000:#000000;
+}

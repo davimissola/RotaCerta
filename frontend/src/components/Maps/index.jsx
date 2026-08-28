@@ -1,22 +1,35 @@
-// API KEY GOOGLE -> AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU
+// API KEY GOOGLE -> AIzaSyAbBtqKTwT0CYeXFkMWSCgrajNJlVfHMfo - AIzaSyAbBtqKTwT0CYeXFkMWSCgrajNJlVfHMfo
+import './maps.css'
+import { useEffect } from 'react'
 
 
 
 
 export function Maps() {
 
+    useEffect(() => {
+        async function carregarMapa() {
+            try {
+                const mapsApi = window.google?.maps
+
+                if (!mapsApi) {
+                    throw new Error('A API do Google Maps ainda não está disponível.')
+                }
+
+                await mapsApi.importLibrary('maps')
+            } catch (error) {
+                console.error('Não foi possível carregar o Google Maps.', error)
+            }
+        }
+        carregarMapa()
+    }, [])
     return (
-        <section>
-            <iframe
-                width="600"
-                height="450"
-                // style="border:0"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU
-                            &q=Space+Needle,Seattle+WA">
-            </iframe>
+        <section className="maps-container">
+            <gmp-map
+                center="-22.902222, -47.067222"
+                zoom="13"
+                map-id="DEMO_MAP_ID"
+            ></gmp-map>
         </section>
     )
 }

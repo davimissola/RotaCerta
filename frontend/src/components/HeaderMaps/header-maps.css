@@ -1,0 +1,40 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+}
+
+header button {
+    background-color: var(--gray-50);
+    color: var(--gray-950);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: none;
+    margin-left: 3vw;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+header input {
+    width: 70%;
+    height: 50px;
+    margin-right: 6vw;
+    margin-top: 30px;
+    border: none;
+    border-radius: 100px;
+    padding-left: 30px;
+    background-color: var(--gray-50);
+    color: var(--gray-400);
+    font-size: 16px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+header input::placeholder {
+    color: var(--gray-400);
+}

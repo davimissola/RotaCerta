@@ -1,0 +1,35 @@
+.footer {
+    position: fixed;
+    left: 2vw;
+    bottom: 16%;
+    z-index: 10;
+}
+
+.footer button {
+    border: none;
+    padding: 17px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 10px;
+}
+
+.report {
+    /* background-color: #860c18; */
+    background-color: var(--gray-700);
+    color: var(--gray-50);
+}
+
+.help {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.report:hover {
+    background-color: var(--gray-800);
+}
+
+.help:hover {
+    background-color: var(--gray-200);
+}
