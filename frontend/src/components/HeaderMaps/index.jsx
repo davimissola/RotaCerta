@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MenuDrawer } from '../MenuDrawer'
 import './header-maps.css'
 
 
 
 export function HeaderMaps() {
+    const inputEndereco = useRef(null)
     const [endereco, setEndereco] = useState('')
     const [sugestaoEndereco, setSugestaoEndereco] = useState([])
 
+    // mandar pro backend
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -16,6 +18,7 @@ export function HeaderMaps() {
             .then(data => console.log(data))
     }
 
+    // autocomplete
     useEffect(() => {
         async function autoCompleteAPI() {
             if (!endereco) {
@@ -70,18 +73,24 @@ export function HeaderMaps() {
                     placeholder='Para onde vai hoje?'
                     value={endereco}
                     onChange={(e) => setEndereco(e.target.value)}
+                    ref={inputEndereco}
                 />
 
                 {sugestaoEndereco.length > 0 ? (
                     <div className="div-sugestao-endereco">
                         {sugestaoEndereco.map(sugestao => {
                             return (
-                                // <p key={sugestao.placePrediction.placeId}>{sugestao.placePrediction.text.text}</p>
                                 <button 
                                     key={sugestao.placePrediction.placeId} 
                                     className='button-sugestao-endereco'
-                                    onClick={() => setEndereco(sugestao.placePrediction.text.text)}>
-                                        {sugestao.placePrediction.text.text}
+                                    onClick={() => setEndereco(sugestao.placePrediction.text.text)}
+                                    type='submit'
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                                        <div>
+                                            {sugestao.placePrediction.structuredFormat.mainText.text}
+                                            <span>{sugestao.placePrediction.structuredFormat.secondaryText.text}</span>
+                                        </div>
                                 </button>
                             )
                         })}
