@@ -81,6 +81,7 @@ header input::placeholder {
 }
 
 .lucide-map-pin {
+    position: fixed;
     color: var(--gray-600);
     transition: all 0.2s ease;
 }
