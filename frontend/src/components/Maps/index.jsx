@@ -1,6 +1,7 @@
 // API KEY GOOGLE -> AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU - 27/08, email cc26125@g.unicamp.br
 import './maps.css'
 import { useEffect, useRef } from 'react'
+import polyline from '@mapbox/polyline';
 
 const MAP_STYLE = [
     { elementType: 'geometry', stylers: [{ color: '#f4f5f6' }] },
@@ -21,9 +22,9 @@ const MAP_STYLE = [
 
 
 
-export function Maps() {
+export function Maps({ routes }) {
     const mapContainerRef = useRef(null)
-    const mapInstanceRef = useRef(null)
+    const mapRef = useRef(null)
 
     useEffect(() => {
         async function carregarMapa() {
@@ -36,11 +37,11 @@ export function Maps() {
 
                 await mapsApi.importLibrary('maps')
 
-                if (mapInstanceRef.current || !mapContainerRef.current) {
+                if (mapRef.current || !mapContainerRef.current) {
                     return
                 }
 
-                mapInstanceRef.current = new mapsApi.Map(mapContainerRef.current, {
+                mapRef.current = new mapsApi.Map(mapContainerRef.current, {
                     center: { lat: -22.902222, lng: -47.067222 },
                     zoom: 13,
                     styles: MAP_STYLE,
@@ -55,6 +56,15 @@ export function Maps() {
         }
         carregarMapa()
     }, [])
+
+
+    // desenhar mapa
+    useEffect(() => {
+        if (Object.keys(routes).length === 0 || !mapRef.current) return
+
+    }, [routes])
+
+
     return (
         <section className="maps-container">
             <div ref={mapContainerRef} className="gmp-map" />

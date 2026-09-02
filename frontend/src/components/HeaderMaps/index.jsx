@@ -4,7 +4,7 @@ import './header-maps.css'
 
 
 
-export function HeaderMaps() {
+export function HeaderMaps({ setRoutes }) {
     const inputEndereco = useRef(null)
     const [endereco, setEndereco] = useState('')
     const [sugestaoEndereco, setSugestaoEndereco] = useState([])
@@ -13,9 +13,10 @@ export function HeaderMaps() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        await fetch(`http://127.0.0.1:8000/maps/route/${endereco}`)
-            .then(reponse => reponse.json())
-            .then(data => console.log(data))
+        const response = await fetch(`http://127.0.0.1:8000/maps/route/${endereco}`)
+        const data = await response.json()
+        console.log(data)
+        setRoutes(data)
     }
 
     // autocomplete

@@ -3,14 +3,16 @@ import { FooterMaps } from "../../components/FooterMaps";
 import { HeaderMaps } from "../../components/HeaderMaps";
 import { Maps } from "../../components/Maps";
 import { ViewsRotas } from "../../components/ViewsRotas";
+import { useState } from 'react';
 
 
 export function PageMaps() {
+    const [routes, setRoutes] = useState({})
     return (
         <main className="page-maps">
-            <HeaderMaps />
+            <HeaderMaps setRoutes={setRoutes} />
 
-            <Maps />
+            <Maps routes={routes}/>
 
             <FooterMaps />
 
