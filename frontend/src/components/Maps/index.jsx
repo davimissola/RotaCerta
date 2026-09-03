@@ -1,6 +1,6 @@
 // API KEY GOOGLE -> AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU - 27/08, email cc26125@g.unicamp.br
 import './maps.css'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import polyline from '@mapbox/polyline';
 
 const MAP_STYLE = [
@@ -25,6 +25,8 @@ const MAP_STYLE = [
 export function Maps({ routes }) {
     const mapContainerRef = useRef(null)
     const mapRef = useRef(null)
+    const rotaRef = useRef(null)
+    const [mapaPronto, setMapaPronto] = useState(false)
 
     useEffect(() => {
         async function carregarMapa() {
@@ -50,6 +52,7 @@ export function Maps({ routes }) {
                     fullscreenControl: false,
                     clickableIcons: false,
                 })
+                setMapaPronto(true)
             } catch (error) {
                 console.error('Não foi possível carregar o Google Maps.', error)
             }
@@ -58,11 +61,36 @@ export function Maps({ routes }) {
     }, [])
 
 
-    // desenhar mapa
+    // desenhar rota
     useEffect(() => {
-        if (Object.keys(routes).length === 0 || !mapRef.current) return
+        const rotaCodificada = routes?.routes?.[0]?.polyline?.encodedPolyline
+        // rotaCodificada armazena o polyline da rota
 
-    }, [routes])
+        if (!mapaPronto || !mapRef.current || !rotaCodificada) return
+
+        const caminhoDecodificado = polyline
+            .decode(rotaCodificada)
+            .map(([lat, lng]) => ({ lat, lng }))
+
+        rotaRef.current?.setMap(null)
+        rotaRef.current = new window.google.maps.Polyline({
+            path: caminhoDecodificado,
+            geodesic: true,
+            strokeColor: '#59666e',
+            strokeOpacity: 1,
+            strokeWeight: 5,
+            map: mapRef.current,
+        })
+
+        const bounds = new window.google.maps.LatLngBounds()
+        caminhoDecodificado.forEach((ponto) => bounds.extend(ponto))
+        mapRef.current.fitBounds(bounds)
+
+        return () => {
+            rotaRef.current?.setMap(null)
+            rotaRef.current = null
+        }
+    }, [mapaPronto, routes])
 
 
     return (

@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { MenuDrawer } from '../MenuDrawer'
 import './header-maps.css'
 
 
 
-export function HeaderMaps({ setRoutes }) {
+export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
     const inputEndereco = useRef(null)
     const [endereco, setEndereco] = useState('')
     const [sugestaoEndereco, setSugestaoEndereco] = useState([])
@@ -15,7 +14,6 @@ export function HeaderMaps({ setRoutes }) {
 
         const response = await fetch(`http://127.0.0.1:8000/maps/route/${endereco}`)
         const data = await response.json()
-        console.log(data)
         setRoutes(data)
     }
 
@@ -59,10 +57,9 @@ export function HeaderMaps({ setRoutes }) {
 
     return (
         <header>
-            <button className='button-menu'>
+            <button className='button-menu' onClick={() => setMenuDrawerOpen(!menuDrawerOpen)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
             </button>
-            <MenuDrawer open={false} />
 
             <form onSubmit={handleSubmit}>
                 <input 

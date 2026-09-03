@@ -1,0 +1,107 @@
+.div-menu-drawer {
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    width: 100%;
+    z-index: 150;
+    background-color: var(--gray-880);
+    transition: height 500ms ease;
+}
+
+.aberto {
+    height: 100%;
+}
+
+.fechado {
+    height: 0%;
+}
+
+.div-menu-drawer button {
+    background-color: var(--gray-850);
+    color: var(--gray-650);
+    height: 55px; 
+    width: 55px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: none;
+    margin-left: 3vw;
+    margin-top: 3vw;
+    cursor: pointer;
+}
+
+.div-menu-drawer h3 {
+    text-align: center;
+    margin-top: 40vh;
+    font-size: 6rem;
+    font-weight: 50;
+    color: var(--gray-800);
+}
+
+.menu-drawer-top {
+    background-color: var(--gray-900);
+}
+
+.div-account {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 50px;
+}
+
+.div-account img {
+    border-radius: 100px;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.div-account-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* .div-account-infos a {
+    color: var(--gray-550);
+    transition: all 0.3s ease;
+} */
+
+.div-account-infos a {
+    text-decoration: none;
+    margin-right: auto;
+    padding: 10px 20px;
+    background-color: var(--gray-800);
+    border-radius: 100px;
+    color: var(--gray-500);
+    transition: all 0.3s ease;
+}
+
+.div-account-infos a:hover {
+    background-color: #292c30;
+}
+
+.div-account-infos p {
+    color: var(--gray-400);
+    font-size: 15px;
+}
+
+.menu-drawer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+.a-nav-bar {
+    text-decoration: none;
+    color: var(--gray-650);
+    font-size: 23px;
+    transition: all 0.3s ease;
+}
+
+.a-nav-bar:hover {
+    color: var(--gray-600);
+}

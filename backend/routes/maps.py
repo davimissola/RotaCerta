@@ -15,7 +15,7 @@ async def maps_route(endereco: str):
     headers = {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': 'AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU', # lembrar de tirar api key do codigo
-        'X-Goog-FieldMask': 'routes.polyline,routes.duration,routes.distanceMeters', # routes.legs.polyline,routes.legs.steps.polyline
+        'X-Goog-FieldMask': 'routes.polyline,routes.duration,routes.distanceMeters', 
     }
     payload = {
         'origin': {
@@ -40,7 +40,6 @@ async def maps_route(endereco: str):
         async with httpx.AsyncClient() as client:
             response = await client.post(url=url, headers=headers, json=payload)
             data = response.json()
-            print(data)
     except Exception as e:
         print(e)
     return data
