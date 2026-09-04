@@ -14,7 +14,7 @@
 
 
 ## Sobre o Projeto
-O RotaCerta é uma plataforma de mobilidade que busca tornar os deslocamentos mais seguros e conscientes. A proposta é analisar diferentes fatores, como localização, horário e condições do trajeto, para oferecer informações que ajudem o usuário a escolher melhores rotas.
+O RotaCerta é uma plataforma de mobilidade que busca tornar os deslocamentos mais seguros e conscientes. A proposta é analisar diferentes fatores, como localização, horário, boletins de ocorrência, condições do trajeto, dados de iluminação da via, fluxo de pessoas, comércios e denúncias dos próprios usuários para oferecer informações que ajudem o usuário a escolher melhores rotas.
 
 O projeto também considera o uso de dados públicos e informações sobre a infraestrutura urbana, permitindo uma análise mais completa das condições de segurança de cada região. Com isso, o RotaCerta pretende facilitar o planejamento de deslocamentos e ajudar as pessoas a tomar decisões mais informadas antes de sair de casa.
 
@@ -43,8 +43,9 @@ Atualmente, o projeto está em desenvolvimento, com foco na construção da plat
 - **Busca de rotas:** definição de origem e destino para planejar deslocamentos.
 - **Análise de segurança:** avaliação de fatores que podem influenciar a segurança do trajeto.
 - **Rotas alternativas:** comparação entre diferentes opções de caminho.
-- **Informações sobre o trajeto:** visualização de dados relevantes para auxiliar na escolha da rota.
 - **Mapa interativo:** navegação e visualização das regiões e rotas disponíveis.
+- **Criação de contas:** usuários podem criar suas próprias contas.
+- **Denúncia de usuário:** presenciou um assalto ou passou por um lugar perigoso? Denuncie no nosso próprio app e contribua para gerar rotas mais seguras.
 <p align="right"><a href="#readme-top">volte ao topo</a></p>
 
 
