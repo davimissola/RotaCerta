@@ -19,7 +19,8 @@ export function PageMaps() {
             <FooterMaps />
 
             <MenuDrawer open={true} setMenuDrawerOpen={setMenuDrawerOpen} menuDrawerOpen={menuDrawerOpen} />
-            <ViewsRotas />
+            
+            <ViewsRotas routes={routes} />
         </main>
     )
 }

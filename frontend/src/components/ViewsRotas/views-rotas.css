@@ -53,6 +53,50 @@
     display: block;
 }
 
+.div-show-routes {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.div-route {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--gray-700);
+}
+
+.div-route svg {
+    width: 25px;
+    fill: var(--gray-700);
+    margin-right: 16px;
+}
+
+.route-infos {
+    display: flex;
+    gap: 32px;
+}
+
+.route-infos div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.route-infos div h3 {
+    color: var(--gray-300);
+    font-weight: 400;
+}
+
+.route-infos div p {
+    color: var(--gray-500);
+}
+
+.route-infos div h4 {
+    color: #5f8495;
+    font-size: 16px;
+}
+
 @media (width <= 1000px) {
     .section-views-rotas {
         right: 0;
