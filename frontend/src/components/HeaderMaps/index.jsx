@@ -25,25 +25,7 @@ export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
         }
 
         const timeout = setTimeout(async () => {
-            const response = await fetch('https://places.googleapis.com/v1/places:autocomplete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "X-Goog-Api-Key": "AIzaSyBZsvi_7gi5HnUk_eF1XRRTJeHxD9blvrU"
-                },
-                body: JSON.stringify({
-                    'input': endereco,
-                    "locationBias": {
-                        "circle": {
-                            "center": {
-                                "latitude": -22.902222,
-                                "longitude": -47.067222
-                            },
-                            "radius": 500.0
-                        }
-                    }
-                })
-            })
+            const response = await fetch(`http://127.0.0.1:8000/maps/autocomplete/${endereco}`)
 
             const data = await response.json()
             const enderecos = data?.suggestions ?? []
