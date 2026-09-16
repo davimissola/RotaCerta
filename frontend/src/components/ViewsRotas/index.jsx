@@ -18,12 +18,6 @@ export function ViewsRotas({ routes }) {
                     Rota recomendada
                 </label>
 
-                <input type="radio" id="opcao2" name="escolha" value="opcao2" />
-                <label htmlFor="opcao2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    Rota mais segura
-                </label>
-
                 <input type="radio" id="opcao3" name="escolha" value="opcao3" />
                 <label htmlFor="opcao3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-gauge-icon lucide-gauge"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
@@ -31,7 +25,7 @@ export function ViewsRotas({ routes }) {
                 </label>
             </div>
             
-            { routes?.routes?.length > 0 && (
+            { routes?.routes?.length > 0 ? (
                 <div className="div-show-routes">
                     { routes.routes.map(route => {
                         return (
@@ -50,6 +44,12 @@ export function ViewsRotas({ routes }) {
                             </div>
                         )
                     })}
+                </div>
+            ) : (
+                <div className='div-not-route'>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M112,80a16,16,0,1,1,16,16A16,16,0,0,1,112,80ZM64,80a64,64,0,0,1,128,0c0,59.95-57.58,93.54-60,94.95a8,8,0,0,1-7.94,0C121.58,173.54,64,140,64,80Zm16,0c0,42.2,35.84,70.21,48,78.5,12.15-8.28,48-36.3,48-78.5a48,48,0,0,0-96,0Zm122.77,67.63a8,8,0,0,0-5.54,15C213.74,168.74,224,176.92,224,184c0,13.36-36.52,32-96,32s-96-18.64-96-32c0-7.08,10.26-15.26,26.77-21.36a8,8,0,0,0-5.54-15C29.22,156.49,16,169.41,16,184c0,31.18,57.71,48,112,48s112-16.82,112-48C240,169.41,226.78,156.49,202.77,147.63Z"></path></svg>
+                    <h2>Nenhuma rota encontrada</h2>
+                    <p>Defina seu destino para encontrar uma rota segura.</p>
                 </div>
             )}
 

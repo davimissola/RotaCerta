@@ -22,7 +22,7 @@
 
 .div-radio-rota {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 40px auto 0 auto;
     text-align: center;
     max-width: 90%;
@@ -95,6 +95,32 @@
 .route-infos div h4 {
     color: #5f8495;
     font-size: 16px;
+}
+
+.div-not-route {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.div-not-route svg {
+    fill: var(--gray-700);
+    width: 200px;
+    height: 200px;
+}
+
+.div-not-route h2 {
+    max-width: 250px;
+    margin: 20px auto 0;
+    color: var(--gray-650);
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.div-not-route p {
+    max-width: 300px;
+    margin: 10px auto;
+    color: var(--gray-500);
+    font-size: 18px;
 }
 
 @media (width <= 1000px) {

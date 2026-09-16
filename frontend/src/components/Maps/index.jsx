@@ -71,6 +71,7 @@ export function Maps({ routes }) {
         const caminhoDecodificado = polyline
             .decode(rotaCodificada)
             .map(([lat, lng]) => ({ lat, lng }))
+        console.log(caminhoDecodificado)
 
         rotaRef.current?.setMap(null)
         rotaRef.current = new window.google.maps.Polyline({

@@ -7,6 +7,7 @@ export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
     const inputEndereco = useRef(null)
     const [endereco, setEndereco] = useState('')
     const [sugestaoEndereco, setSugestaoEndereco] = useState([])
+    const [rotaDesenhada, setRotaDesenhada] = useState(false)
 
     // mandar pro backend
     async function handleSubmit(e) {
@@ -15,6 +16,7 @@ export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
         const response = await fetch(`http://127.0.0.1:8000/maps/route/${endereco}`)
         const data = await response.json()
         setRoutes(data)
+        setRotaDesenhada(true)
     }
 
     // autocomplete
@@ -52,7 +54,7 @@ export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
                     ref={inputEndereco}
                 />
 
-                {sugestaoEndereco.length > 0 ? (
+                {sugestaoEndereco.length > 0 && !rotaDesenhada ? (
                     <div className="div-sugestao-endereco">
                         {sugestaoEndereco.map(sugestao => {
                             return (
