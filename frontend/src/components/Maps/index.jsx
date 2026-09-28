@@ -73,6 +73,8 @@ export function Maps({ routes }) {
             .map(([lat, lng]) => ({ lat, lng }))
         console.log(caminhoDecodificado)
 
+        // mandar caminhoDecodificado DIRETO do backend
+
         rotaRef.current?.setMap(null)
         rotaRef.current = new window.google.maps.Polyline({
             path: caminhoDecodificado,

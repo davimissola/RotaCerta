@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException
 import httpx
+from services.services_maps import criar_rotas_adicionais
+from schemas.maps import GoogleMapsRouteResponse
 
 
 
@@ -47,6 +49,7 @@ async def maps_autocomplete(endereco: str):
 
 @router.get('/route/{endereco}')
 async def maps_route(endereco: str):
+    print(endereco)
     if not GOOGLE_MAPS_API_KEY:
         raise HTTPException(status_code=500, detail='API do Google Maps não está configurada.')
 
@@ -58,10 +61,23 @@ async def maps_route(endereco: str):
     }
     payload = {
         'origin': {
-            'address': 'Colégio Técnico de Campinas - Unicamp - Rua Culto à Ciência - Centro, Campinas - SP, Brasil' # alterar pra localização atual do usuario
+                'location': {
+                    'latLng': {
+                        'latitude': -22.90116,
+                        'longitude': -47.06168,
+                    }
+                }
+            # comentarios sao o jeito padrao, acima foi um teste
+            # 'address': 'Colégio Técnico de Campinas - Unicamp - Rua Culto à Ciência - Centro, Campinas - SP, Brasil' # alterar pra localização atual do usuario
         },
         'destination': {
-            'address': endereco
+                'location': {
+                    'latLng': {
+                        'latitude': -22.91307,
+                        'longitude': -47.05554,
+                    }
+                }
+            # 'address': endereco
         },
         "travelMode": "DRIVE",
         "routingPreference": "TRAFFIC_AWARE",
@@ -78,7 +94,10 @@ async def maps_route(endereco: str):
     try:
         async with httpx.AsyncClient() as client:
             response = await client.post(url=url, headers=headers, json=payload)
-            data = response.json()
+            # criar_rotas_adicionais(response)
+
+            return response.json()
     except Exception as e:
         print(e)
-    return data
+        raise HTTPException(status_code=400, detail=str(e))
+    
