@@ -9,7 +9,7 @@ export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
     const [sugestaoEndereco, setSugestaoEndereco] = useState([])
     const [rotaDesenhada, setRotaDesenhada] = useState(false)
 
-    // mandar pro backend
+
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -19,7 +19,6 @@ export function HeaderMaps({ setRoutes, setMenuDrawerOpen, menuDrawerOpen }) {
         setRotaDesenhada(true)
     }
 
-    // autocomplete
     useEffect(() => {
         if (!endereco) {
             setSugestaoEndereco([])

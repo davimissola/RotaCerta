@@ -56,9 +56,11 @@ async def maps_route(destino: str):
     try:
         service_maps = ServicesMaps(GOOGLE_MAPS_API_KEY)
         response = await service_maps.buscar_rotas_api(origem, destino, tipo_localizacao='endereco')
-        await service_maps.criar_rotas_adicionais(response)
+        todas_subrotas = await service_maps.criar_rotas_adicionais(response)
+        todas_combinacoes = service_maps.combinar_subrotas(todas_subrotas)
+        routes = service_maps.juntar_combinacoes(todas_combinacoes)
             
-        return 'deu certo'
+        return routes
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
     

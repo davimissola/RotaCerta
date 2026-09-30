@@ -38,8 +38,8 @@ export function ViewsRotas({ routes }) {
                                             <h4>89% segurança</h4>            
                                         </div>
                                         <div>
-                                            <p>{(route.distanceMeters / 1000).toFixed(1)}km</p>                              
-                                            <p>{(route.duration.replace('s', '') / 60).toFixed(0)} min</p>                       
+                                            {/* <p>{(route.distanceMeters / 1000).toFixed(1)}km</p>                              
+                                            <p>{(route.duration.replace('s', '') / 60).toFixed(0)} min</p>                        */}
                                         </div>
                                     </div>
                                 </div>

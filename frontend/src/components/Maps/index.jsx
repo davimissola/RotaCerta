@@ -63,15 +63,15 @@ export function Maps({ routes }) {
 
     // desenhar rota
     useEffect(() => {
-        const rotaCodificada = routes?.routes?.[0]?.polyline?.encodedPolyline
+        const caminhoDecodificado = routes?.routes?.[0]
         // rotaCodificada armazena o polyline da rota
 
-        if (!mapaPronto || !mapRef.current || !rotaCodificada) return
+        if (!mapaPronto || !mapRef.current || !caminhoDecodificado) return
 
-        const caminhoDecodificado = polyline
-            .decode(rotaCodificada)
-            .map(([lat, lng]) => ({ lat, lng }))
-        console.log(caminhoDecodificado)
+        // const caminhoDecodificado = polyline
+        //     .decode(rotaCodificada)
+        //     .map(([lat, lng]) => ({ lat, lng }))
+        // console.log(caminhoDecodificado)
 
         // mandar caminhoDecodificado DIRETO do backend
 

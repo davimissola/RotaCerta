@@ -2,6 +2,7 @@ from schemas.maps import GoogleMapsRouteResponse, GoogleMapsRoute
 from typing import Literal
 import polyline
 import httpx
+from itertools import product
 
 
 
@@ -10,10 +11,96 @@ import httpx
 class ServicesMaps:
     def __init__(self, GOOGLE_MAPS_API_KEY):
         self.chave_api: str = GOOGLE_MAPS_API_KEY
-        todas_rotas = {} # dicionario com chave 'routes' e dentro de routes uma lista de TODAS as rotas
 
 
-    async def buscar_rotas_api(self, origem, destino, tipo_localizacao: Literal['endereco', 'coodernada']):
+    def decodificar_polyline(self, encodedPolyline: str) -> list[tuple[float, float]]:
+        pontos = polyline.decode(
+            encodedPolyline,
+            precision=5
+        )
+        return pontos
+
+
+    async def criar_rotas_adicionais(self, response):
+        dados = GoogleMapsRouteResponse.model_validate(response.json())
+        todas_subrotas: list[list[list[GoogleMapsRoute]]] = []
+
+        for rota in dados.routes:
+            rota_subrotas: list[list[GoogleMapsRoute]] = []
+            rota_pontos_intermediarios = self.dividir_rota(rota)
+
+            # len(rotas_ponros_intermediarios) = 3
+            for i in range(len(rota_pontos_intermediarios)-1):
+                origem = rota_pontos_intermediarios[i]
+                destino = rota_pontos_intermediarios[i+1]
+
+                response_add = await self.buscar_rotas_api(
+                    origem,
+                    destino,
+                    tipo_localizacao='coordenada'
+                    )
+                dados_add = GoogleMapsRouteResponse.model_validate(
+                    response_add.json()
+                    )
+                rota_subrotas.append(dados_add.routes)
+
+            todas_subrotas.append(rota_subrotas)
+
+        # todos os segmentos
+        return todas_subrotas
+
+
+    def dividir_rota(self, rota: GoogleMapsRoute):
+        pontos = self.decodificar_polyline(rota.polyline.encodedPolyline)
+
+        distancia_metros: int = int(rota.distanceMeters)
+        if 2000 > distancia_metros:
+            quantidade_segmentos = 1
+        elif 8000 > distancia_metros:
+            quantidade_segmentos = 2
+        elif 16000 > distancia_metros:
+            quantidade_segmentos = 3
+        else:
+            quantidade_segmentos = 4
+
+
+        rota_pontos_intermediarios: list[tuple[float, float]] = [
+            pontos[
+                round(i * (len(pontos) - 1) / quantidade_segmentos)
+            ]
+            for i in range(quantidade_segmentos + 1)
+            ]
+        return rota_pontos_intermediarios
+
+
+    def combinar_subrotas(self, todas_subrotas: list[list[list[GoogleMapsRoute]]]):
+        todas_combinacoes = []
+        for rota_subrotas in todas_subrotas:
+            combinacoes_rota = list(
+                product(*rota_subrotas)
+            )
+
+            todas_combinacoes.append(combinacoes_rota)
+        return todas_combinacoes
+
+
+    def juntar_combinacoes(self, todas_combinacoes: list[list[tuple[GoogleMapsRoute, ...]]]):
+        routes = {'routes': []}
+        for combinacoes in todas_combinacoes:
+            for rota in combinacoes:
+                todos_pontos = []
+                for subrota in rota:
+                    pontos_subrota = self.decodificar_polyline(subrota.polyline.encodedPolyline)
+
+                    if not todos_pontos:
+                        todos_pontos.extend(pontos_subrota)
+                    else:
+                        todos_pontos.extend(pontos_subrota[1:])
+                routes['routes'].append(todos_pontos)
+        return routes
+
+
+    async def buscar_rotas_api(self, origem, destino, tipo_localizacao: Literal['endereco', 'coordenada']):
         url = 'https://routes.googleapis.com/directions/v2:computeRoutes'
         headers = {
             'Content-Type': 'application/json',
@@ -78,47 +165,3 @@ class ServicesMaps:
         except Exception as e:
             raise Exception(e)
 
-
-    async def criar_rotas_adicionais(self, response):
-        dados = GoogleMapsRouteResponse.model_validate(response.json())
-        # todos_pontos_intermediarios: list[list[tuple[float, float]]] = []
-
-        for rota in dados.routes:
-            rota_pontos_intermediarios = self.dividir_rota(rota)
-            # rota_pontos_intermediarios = [(x1, y1), (x2, y2), (x3, y3)]
-
-            for i in range(len(rota_pontos_intermediarios-1)):
-                response_add = self.buscar_rotas_api(origem=rota_pontos_intermediarios[i], destino=rota_pontos_intermediarios[i+1], tipo_localizacao='coodernada')
-                dados_add = GoogleMapsRouteResponse.model_validate(response_add.json())
-                # dados_add_1.routes armazena a lista com a polyline de até 3 rotas de (x1, y1) -> (x2, y2)
-
-
-    def dividir_rota(self, rota: GoogleMapsRoute):
-        pontos = self.decodificar_polyline(rota.polyline.encodedPolyline)
-
-        distancia_metros: int = int(rota.distanceMeters)
-        if 2000 > distancia_metros:
-            quantidade_segmentos = 1
-        elif 8000 > distancia_metros:
-            quantidade_segmentos = 2
-        elif 16000 > distancia_metros:
-            quantidade_segmentos = 3
-        else:
-            quantidade_segmentos = 4
-
-
-        rota_pontos_intermediarios: list[tuple[float, float]] = [
-            pontos[
-                round(i * (len(pontos) - 1) / quantidade_segmentos)
-            ]
-            for i in range(quantidade_segmentos + 1)
-            ]
-        return rota_pontos_intermediarios
-
-
-    def decodificar_polyline(encodedPolyline: str) -> list[tuple[float, float]]:
-        pontos = polyline.decode(
-            encodedPolyline,
-            precision=5
-        )
-        return pontos
