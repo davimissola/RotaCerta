@@ -65,4 +65,3 @@ async def maps_route(destino: str):
         return routes
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-    
