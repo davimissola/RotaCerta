@@ -29,7 +29,6 @@ class ServicesMaps:
             rota_subrotas: list[list[GoogleMapsRoute]] = []
             rota_pontos_intermediarios = self.dividir_rota(rota)
 
-            # len(rotas_ponros_intermediarios) = 3
             for i in range(len(rota_pontos_intermediarios)-1):
                 origem = rota_pontos_intermediarios[i]
                 destino = rota_pontos_intermediarios[i+1]
@@ -62,7 +61,6 @@ class ServicesMaps:
             quantidade_segmentos = 3
         else:
             quantidade_segmentos = 4
-
 
         rota_pontos_intermediarios: list[tuple[float, float]] = [
             pontos[

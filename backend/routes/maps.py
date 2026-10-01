@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException
 import httpx
 from services.services_maps import ServicesMaps
-from schemas.maps import GoogleMapsRouteResponse
 
 
 
@@ -46,7 +45,6 @@ async def maps_autocomplete(endereco: str):
     return response.json()
 
 
-
 @router.get('/route/{destino}')
 async def maps_route(destino: str):
     origem = 'Colégio Técnico de Campinas - Unicamp, R. Culto à Ciência, 177 - Centro, Campinas - SP, 13020-060'
@@ -55,7 +53,11 @@ async def maps_route(destino: str):
 
     try:
         service_maps = ServicesMaps(GOOGLE_MAPS_API_KEY)
-        response = await service_maps.buscar_rotas_api(origem, destino, tipo_localizacao='endereco')
+        response = await service_maps.buscar_rotas_api(
+            origem, 
+            destino, 
+            tipo_localizacao='endereco'
+            )
         todas_subrotas = await service_maps.criar_rotas_adicionais(response)
         todas_combinacoes = service_maps.combinar_subrotas(todas_subrotas)
         routes = service_maps.juntar_combinacoes(todas_combinacoes)
