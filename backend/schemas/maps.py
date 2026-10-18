@@ -1,6 +1,9 @@
 from pydantic import BaseModel
 
 
+"""
+Schema pras instanciações de rota e decodificação futura de polilinha do maps
+"""
 
 class Polyline(BaseModel):
     encodedPolyline: str
